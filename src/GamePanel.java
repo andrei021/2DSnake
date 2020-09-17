@@ -53,8 +53,6 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void draw(Graphics g) {
-//        drawGrid(g);
-
         if(this.running) {
             g.setColor(Color.RED);
             g.fillRect(this.appleX, this.appleY, UNIT_SIZE, UNIT_SIZE);
@@ -106,11 +104,33 @@ public class GamePanel extends JPanel implements ActionListener {
     }
 
     public void checkApple() {
-        if(x[0] == this.appleX && y[0] == this.appleY) {
+        if(intersects(appleX, appleY)) {
             bodyParts++;
             applesEaten++;
             generateApple();
         }
+    }
+
+    private boolean intersects(int appleX, int appleY) {
+        int tw = UNIT_SIZE;
+        int th = UNIT_SIZE;
+        int rw = UNIT_SIZE;
+        int rh = UNIT_SIZE;
+
+        int tx = x[0];
+        int ty = y[0];
+        int rx = appleX;
+        int ry = appleY;
+
+        rw += rx;
+        rh += ry;
+        tw += tx;
+        th += ty;
+
+        return ((rw < rx || rw > tx) &&
+                (rh < ry || rh > ty) &&
+                (tw < tx || tw > rx) &&
+                (th < ty || th > ry));
     }
 
     public void checkCollisions() {

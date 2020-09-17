@@ -2,7 +2,6 @@
  * Created on: 16 September 2020
  * Author: Mihai Andrei
  */
-
 import javax.swing.*;
 
 public class GameFrame extends JFrame {
